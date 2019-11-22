@@ -39,11 +39,11 @@ let b1= new Image();
 let shag=new Audio();
 let makemoney=new Audio();
 let error=new Audio();
-
+let lose=new Audio();
 let win=new Audio();
 let  musicphon1=new Audio();
 let mousemove=new Audio();
-
+lose.src="music/lose.mp3";
 shag.src="music/1.mp3";
 musicphon1.src="music/mg1.mp3";
 musicphon1.volume = 0.01; 
@@ -236,7 +236,7 @@ document.onkeydown = function(e){
         draw1();
       }
 
-      if(key===81){
+      if(key===220){
        document.getElementById("div").innerHTML =zp +"$";
 if(ypos===downLim||ypos===downLim-20){
   if(xpos===leftLim){
@@ -315,7 +315,8 @@ let interval = setInterval(
 
   function game() {
 
-    if(zp<15){
+    if(zp<=0){
+      lose.play();
       alert("you lose");
       zp=1500;
 x1=20;
@@ -556,3 +557,107 @@ mph+=20;
 let t=2.5;
 let mph=100;
 let x1=20;
+
+
+
+
+function tele1(){
+        photomen.src="img/p3.png";
+      if(xpos>leftLim){        shag.play();
+        xpos -= x1;
+
+      }
+        draw1();
+}
+
+function tele2(){
+shag.play(); 
+    if(ypos>topLim){             
+      ypos -= 20;
+      w1-=0.4;
+      h1-=0.8;
+   }
+      draw1();
+  }
+
+  function tele3(){
+    if(ypos<downLim){shag.play();
+      ypos += 20;
+      w1+=0.4;
+      h1+=0.8;            }
+      draw1();
+  }
+    function tele4(){
+    photomen.src="img/p2.png";
+    if(xpos<rightLim){
+                  shag.play();
+      xpos += x1;
+
+    }
+      draw1();
+  }
+  function tele5(){
+       document.getElementById("div").innerHTML =zp +"$";
+if(ypos===downLim||ypos===downLim-20){
+  if(xpos===leftLim){
+    if(xpossh1==sh1Lim){
+     zp+=mph;
+     makemoney.play(); 
+     xpossh1 =xpossh1s;
+     draw1();
+   } else{         error.play();
+    alert("об'єкт прихований від сторонніх очей");
+           zp-=15;
+  
+  }
+
+} else if(xpos===rightLim){     if(xpossh2==sh2Lim){     makemoney.play(); 
+ zp+=mph; 
+ 
+ xpossh2 =xpossh2s;
+} else{         error.play();
+  alert("об'єкт прихований від сторонніх очей");
+         zp-=15;
+
+}}else{      error.play();
+  alert("зміни позицію");
+         zp-=15;
+   
+}
+} else if(ypos===topLim||ypos===topLim+20){
+  if(xpos===leftLim){
+
+    if(xpossh3==sh3Lim){   makemoney.play(); 
+      xpossh3 =xpossh3s;
+      zp+=mph; 
+  
+    } else{       error.play();
+       alert("об'єкт прихований від сторонніх очей");
+
+             zp-=15;
+    }} else if(xpos===rightLim){     if(xpossh4==sh4Lim){       makemoney.play(); 
+      xpossh4 =xpossh4s;
+      zp+=mph; 
+    
+    } else{      
+     error.play();
+       alert("об'єкт прихований від сторонніх очей");
+
+             zp-=15;
+    }}else{
+          error.play();
+      alert("зміни позицію");
+
+
+             zp-=15;
+    }
+  } else{ 
+            error.play();
+    alert("зміни позицію");
+           zp-=15;
+
+  }
+
+  draw1();
+  document.getElementById("div").innerHTML =zp +"$";
+  }
